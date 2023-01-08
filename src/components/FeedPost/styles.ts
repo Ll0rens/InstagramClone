@@ -55,16 +55,6 @@ const styles = StyleSheet.create({
       lineHeight: 18,
     },
 
-    comment: {
-      flexDirection: 'row',
-      },
-
-    commentText: {
-        color: colors.black,
-        flex: 1,
-        lineHeight: 18,
-    }
-
   });
 
   export default styles;
