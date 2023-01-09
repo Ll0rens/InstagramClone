@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { useState } from 'react';
+import { View, Text,  Image, Pressable } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo'
 import colors from '../../theme/colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -6,13 +7,25 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import Comment from '../Comment';
-import {IPost} from '../../types/models'
+import {IPost} from '../../types/models';
+import DoublePressable from '../DoublePressable';
 
 interface IFeedPost {
     post: IPost;
 };
 
+
+
 const FeedPost = ({post}: IFeedPost) => {
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const toogleDescriptionExpanded = () => {
+  setIsDescriptionExpanded(v => !v);
+  };
+  const toggleLike = () => {
+    setIsLiked(v => !v);
+  }
+
   return (
     <View style={styles.post}>
       <View style={styles.header}>
@@ -20,21 +33,25 @@ const FeedPost = ({post}: IFeedPost) => {
           }}
           style={styles.userAvatar} 
         />
-        <Text style={styles.userName}>Marcos Llorens</Text>
+        <Text style={styles.userName}>{post.user.username}</Text>
         <Entypo name='dots-three-horizontal' size={16} style={styles.threeDots}/>
       </View>
-      <Image source={{uri: post.image
-        }}
-        style={styles.image}
-      />
+      <DoublePressable onDoublePress={toggleLike}>
+        <Image source={{uri: post.image
+          }}
+          style={styles.image}
+        />
+      </DoublePressable>
       <View style={styles.footer}>
         <View style={styles.iconContainer}>
-          <AntDesign
-            name={'hearto'}
-            size={24}
-            style={styles.icon}
-            color={colors.black}
-          />
+          <Pressable onPress={toggleLike}>
+            <AntDesign
+              name={isLiked ? 'heart' : 'hearto'}
+              size={24}
+              style={styles.icon}
+              color={isLiked ? colors.accent : colors.black}
+            />
+          </Pressable>
           <Ionicons
             name="chatbubble-outline"
             size={24}
@@ -59,10 +76,11 @@ const FeedPost = ({post}: IFeedPost) => {
             <Text style={styles.bold}>{post.nofLikes} others</Text>
           </Text>
           {/* Photo Description */}
-          <Text style={styles.text}>
+          <Text style={styles.text} numberOfLines={isDescriptionExpanded ? 0 : 3}>
             <Text style={styles.bold}>{post.user.username}.</Text>
                 {post.description}
           </Text>
+          <Text onPress={toogleDescriptionExpanded}>{isDescriptionExpanded ? 'less' : 'more' }</Text>
           {/* Comments*/}
           <Text>View all {post.nofComments} comments</Text>          
             {post.comments.map(comment => (
