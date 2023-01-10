@@ -7,7 +7,7 @@ interface IVideoPlayer {
 };
 
 const VideoPlayer = ({uri}:IVideoPlayer) => {
-  return <Video source={{uri}} style={styles.video} />;
+  return <Video source={{uri}} style={styles.video} />
 };
 
 const styles = StyleSheet.create({

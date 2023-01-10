@@ -41,9 +41,10 @@ const FeedPost = ({post}: IFeedPost) => {
   } else if (post.images) {
     content = <Carousel images = {post.images} onDoublePress={toggleLike}/>;
   } else if (post.video) {
-    <DoublePressable onDoublePress={toggleLike}>
-      <VideoPlayer uri={post.video} />
-    </DoublePressable>
+    content = (
+      <DoublePressable onDoublePress={toggleLike}>
+        <VideoPlayer uri={post.video} />
+      </DoublePressable>)
   }
 
   return (
