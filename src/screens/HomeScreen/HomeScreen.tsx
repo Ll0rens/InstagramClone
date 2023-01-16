@@ -6,8 +6,9 @@ const HomeScreen = () => {
   return (
       <FlatList
         data={posts}
-        renderItem={({item}) => <FeedPost post={item} />}
-        showsVerticalScrollIndicator={false} >
+        renderItem={({item}) => 
+          <FeedPost post={item} />}
+            showsVerticalScrollIndicator={false} >
       </FlatList>
   );
 };

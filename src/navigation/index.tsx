@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator(); // {Navigator, screen}
 const Navigation = () => {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName='UserProfile' screenOptions={{headerShown: true}}>
+        <Stack.Navigator initialRouteName='HomeScreen' screenOptions={{headerShown: true}}>
             <Stack.Screen 
                 name='Feed'
                 component={HomeScreen}/>
@@ -19,7 +19,7 @@ const Navigation = () => {
         </Stack.Navigator>
     </NavigationContainer>
   )
-}
+};
 
 const HeaderTitle = () => {
     return (
