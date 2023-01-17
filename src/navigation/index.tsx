@@ -1,11 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
-import HomeScreen from '../screens/HomeScreen/HomeScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import { Image } from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import logo from '../assets/images/logo.png'; 
+import CommentsScreen from '../screens/CommentsScreen/CommentsScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 const Stack = createNativeStackNavigator(); // {Navigator, screen}
+
 const Navigation = () => {
   return (
     <NavigationContainer>
@@ -16,8 +14,8 @@ const Navigation = () => {
                 options={{headerShown: false}}
             />
             <Stack.Screen
-                name='UserProfile'
-                component={ProfileScreen}
+                name='Comments'
+                component={CommentsScreen}
                 options={{title: 'Profile'}}/>
         </Stack.Navigator>
     </NavigationContainer>

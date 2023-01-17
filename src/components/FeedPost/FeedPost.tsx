@@ -21,9 +21,15 @@ const FeedPost = ({post}: IFeedPost) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const navigation = useNavigation();
+
   const navigateToUser = () => {
     navigation.navigate('UserProfile', {userId: post.user.id})
   }
+
+  const navigateToComments = () => {
+    navigation.navigate('Comments', {postId: post.id})
+  }
+
   const toogleDescriptionExpanded = () => {
   setIsDescriptionExpanded(v => !v);
   };
@@ -103,7 +109,7 @@ const FeedPost = ({post}: IFeedPost) => {
           </Text>
           <Text onPress={toogleDescriptionExpanded}>{isDescriptionExpanded ? 'less' : 'more' }</Text>
           {/* Comments*/}
-          <Text>View all {post.nofComments} comments</Text>          
+          <Text onPress={navigateToComments}>View all {post.nofComments} comments</Text>          
             {post.comments.map(comment => (
                 <Comment comment={comment} key={comment.id}/>
             ))}
